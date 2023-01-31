@@ -1,4 +1,4 @@
-import linecache
+from linecache import getline
 def addPassword(n,p):
     with open("passwordsNames.txt", 'a') as wn:
         wn.write(n)
@@ -13,5 +13,5 @@ def seePassword(n):
             if "%s\n" % n in line :
                 print(f"Your {n} password is:")
                 break
-        password = linecache.getline("passwords.txt", line_num)
+        password = getline("passwords.txt", line_num)
         print(password)
