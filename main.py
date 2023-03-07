@@ -8,7 +8,7 @@ while True:
         password = input("Password: ")
         with open("passwords.json", "r+") as file:
             data = json.load(file)
-            data[name] = password
+            data[name.lower()] = password
             file.seek(0)
             json.dump(data, file)
     elif option == "2":
@@ -16,14 +16,17 @@ while True:
         with open("passwords.json", "r") as file:
             data = json.load(file)
             try:
-                print(f"Your {name} password is {data[name]}.\n")
+                print(f"Your {name.lower()} password is {data[name.lower()]}.\n")
             except KeyError:
-                print(f"There's no password for {name}.")
+                print(f"There's no password for {name.lower()}.\n")
     elif option == "3":
         name = input("Name: ")
         with open("passwords.json", "r") as file:
             data = json.load(file)
-            del(data[name])
+            try:
+                del(data[name.lower()])
+            except KeyError:
+                print(f"There's no password for {name.lower()}.\n")
         with open("passwords.json", "w") as file:
             json.dump(data, file)
     else:
